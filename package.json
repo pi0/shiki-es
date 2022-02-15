@@ -1,6 +1,6 @@
 {
   "name": "shiki-es",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": "unjs/shiki-es",
   "description": "Standalone build of shiki fully compatible with all ESM environments.",
