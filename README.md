@@ -17,14 +17,12 @@ npm i shiki-es
 yarn add shiki-es
 ```
 
-Import:
-
 ```js
-// ESM
-import { } from 'shiki-es'
+import { getHighlighter } from 'shiki-es'
 
-// CommonJS
-const { } = require('shiki-es')
+const highlighter = await getHighlighter({ theme: 'nord' })
+
+console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' }))
 ```
 
 ## License

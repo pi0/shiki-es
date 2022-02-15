@@ -1,7 +1,7 @@
-// @ts-nocheck
-import fetch, { Response } from 'node-fetch'
-globalThis.fetch = globalThis.fetch || fetch
-globalThis.Response = globalThis.Response || Response
+import { setCDN, setWasm } from 'shiki'
+import { version } from '../package.json'
+
+setCDN(`https://unpkg.com/shiki-es@${version}/dist/shiki/`)
 
 export {
   BUNDLED_LANGUAGES,
