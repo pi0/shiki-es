@@ -17,19 +17,34 @@ export default defineBuildConfig({
         'window': '({})',
         "await fetch(": 'await (__shiki_fetch__||fetch)('
       }
-    }
+    },
   },
   entries: [
     './src/shiki',
     './src/shiki.node'
   ],
   hooks: {
+    async 'build:before'(ctx) {
+      const genDir = resolve(ctx.options.rootDir, 'gen')
+      await fse.mkdirp(genDir)
+
+      const shiki = await import('shiki')
+      const assets = [
+        ...shiki.BUNDLED_LANGUAGES.map(lang => `languages/${lang.path}`),
+        ...shiki.BUNDLED_THEMES.map(theme => `themes/${theme}.json`)
+      ]
+      const assetsCode = `export default {\n${assets.map(asset => `  '${asset}': () => import('shiki/${asset}')`).join(',\n')}\n}`
+      await fse.writeFile(resolve(genDir, 'assets.ts'), assetsCode)
+
+      const buff = await fse.readFile('./node_modules/shiki/dist/onig.wasm')
+      await fse.writeFile(resolve(genDir, 'onig.ts'), `export default () => "${buff.toString('base64')}"`)
+    },
     async 'rollup:done'(ctx) {
       const shikiDir = dirname(require.resolve('shiki/package.json'))
-      const distDir = resolve(ctx.options.outDir, 'shiki')
-      await fse.copy(resolve(shikiDir, 'languages'), resolve(distDir, 'languages'))
-      await fse.copy(resolve(shikiDir, 'themes'), resolve(distDir, 'themes'))
-      await fse.copy(resolve(shikiDir, 'dist/onig.wasm'), resolve(distDir, 'onig.wasm'))
+      const assetsDir = resolve(ctx.options.outDir, 'assets')
+      await fse.copy(resolve(shikiDir, 'languages'), resolve(assetsDir, 'languages'))
+      await fse.copy(resolve(shikiDir, 'themes'), resolve(assetsDir, 'themes'))
+      await fse.copy(resolve(shikiDir, 'dist/onig.wasm'), resolve(assetsDir, 'onig.wasm'))
       await fse.copy(resolve(shikiDir, 'dist/index.d.ts'), resolve(ctx.options.outDir, 'shiki.d.ts'))
     }
   }

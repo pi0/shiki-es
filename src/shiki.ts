@@ -1,7 +1,7 @@
-import { setCDN, setWasm } from 'shiki'
+import { setCDN } from 'shiki'
 import { version } from '../package.json'
 
-setCDN(`https://unpkg.com/shiki-es@${version}/dist/shiki/`)
+setCDN(`https://cdn.jsdelivr.net/npm/shiki-es@${version}/dist/assets/`)
 
 export {
   BUNDLED_LANGUAGES,
