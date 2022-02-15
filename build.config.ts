@@ -2,8 +2,6 @@ import { defineBuildConfig } from 'unbuild'
 import { dirname, resolve } from 'path'
 import fse from 'fs-extra'
 
-const mocksFile = resolve(__dirname, 'src/mocks.ts')
-
 export default defineBuildConfig({
   declaration: false,
   rollup: {
@@ -15,7 +13,7 @@ export default defineBuildConfig({
       values: {
         'const isBrowser = ': 'const isBrowser = true ||',
         'window': '({})',
-        "await fetch(": 'await (__shiki_fetch__||fetch)('
+        "await fetch(": 'await (globalThis.__shiki_fetch__||globalThis.fetch)('
       }
     },
   },
