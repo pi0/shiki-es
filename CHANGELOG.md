@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/unjs/shiki-es/compare/v0.1.1...v0.1.2) (2022-02-15)
+
+
+### Bug Fixes
+
+* preserve assets structure ([d33301d](https://github.com/unjs/shiki-es/commit/d33301da279eef6befef741ae43c0b669b3a33c1))
+
 ### 0.1.1 (2022-02-15)
 
 
