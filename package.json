@@ -19,12 +19,14 @@
   "scripts": {
     "build": "unbuild",
     "prepack": "unbuild",
-    "test": "yarn build && node ./test/test.mjs"
+    "test": "yarn build && node ./test/test.mjs",
+    "release": "standard-version && npm publish && git push --follow-tags"
   },
   "devDependencies": {
     "fs-extra": "^10.0.0",
     "node-fetch": "^3.2.0",
     "shiki": "^0.10.0",
+    "standard-version": "^9.3.2",
     "unbuild": "^0.6.7"
   }
 }
