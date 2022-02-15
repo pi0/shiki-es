@@ -40,9 +40,9 @@ export default defineBuildConfig({
     async 'rollup:done'(ctx) {
       const shikiDir = dirname(require.resolve('shiki/package.json'))
       const assetsDir = resolve(ctx.options.outDir, 'assets')
-      await fse.copy(resolve(shikiDir, 'languages'), resolve(assetsDir, 'languages'))
-      await fse.copy(resolve(shikiDir, 'themes'), resolve(assetsDir, 'themes'))
-      await fse.copy(resolve(shikiDir, 'dist/onig.wasm'), resolve(assetsDir, 'onig.wasm'))
+      for (const item of ['languages', 'themes', 'dist/onig.wasm']) {
+        await fse.copy(resolve(shikiDir, item), resolve(assetsDir, item))
+      }
       await fse.copy(resolve(shikiDir, 'dist/index.d.ts'), resolve(ctx.options.outDir, 'shiki.d.ts'))
     }
   }
