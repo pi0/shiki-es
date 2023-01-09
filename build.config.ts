@@ -3,6 +3,7 @@ import { dirname, resolve } from 'path'
 import fse from 'fs-extra'
 
 export default defineBuildConfig({
+  failOnWarn: false,
   declaration: false,
   rollup: {
     inlineDependencies: true,

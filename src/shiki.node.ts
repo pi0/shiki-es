@@ -3,7 +3,7 @@ export * from './shiki'
 import assets from '../gen/assets'
 import wasm from '../gen/onig'
 
-setCDN('-')
+setCDN('')
 globalThis.__shiki_fetch__ = async (url) => {
   url = url.substr(1)
   const _asset = assets[url]
