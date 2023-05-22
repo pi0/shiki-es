@@ -8,7 +8,8 @@
   "exports": {
     ".": {
       "node": "./dist/shiki.node.mjs",
-      "default": "./dist/shiki.mjs"
+      "default": "./dist/shiki.mjs",
+      "types": "./dist/shiki.d.ts"
     },
     "./shiki/*": "./dist/shiki/*"
   },
