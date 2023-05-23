@@ -7,9 +7,9 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/shiki.d.ts",
       "node": "./dist/shiki.node.mjs",
-      "default": "./dist/shiki.mjs",
-      "types": "./dist/shiki.d.ts"
+      "default": "./dist/shiki.mjs"
     },
     "./shiki/*": "./dist/shiki/*"
   },
