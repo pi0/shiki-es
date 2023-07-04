@@ -1,0 +1,3 @@
+repo.provider=github
+repo.domain=github.com
+repo.repo=unjs/shiki-es
