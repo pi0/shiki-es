@@ -15,6 +15,7 @@ export default defineBuildConfig({
         "const isBrowser = ": "const isBrowser = true ||",
         window: "({})",
         "await fetch(": "await (globalThis.__shiki_fetch__||globalThis.fetch)(",
+        "process.env.VSCODE_TEXTMATE_DEBUG": "false",
       },
     },
   },
