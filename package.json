@@ -26,6 +26,7 @@
     "release": "pnpm test && pnpm build && changelogen --release --publish && git push --follow-tags"
   },
   "devDependencies": {
+    "@types/node": "^20.3.3",
     "changelogen": "^0.5.4",
     "eslint": "^8.44.0",
     "eslint-config-unjs": "^0.2.1",
