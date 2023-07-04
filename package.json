@@ -19,14 +19,20 @@
   "scripts": {
     "build": "unbuild",
     "prepack": "unbuild",
-    "test": "pnpm build && node ./test/test.mjs",
-    "release": "standard-version && npm publish && git push --follow-tags"
+    "lint": "eslint --ext .ts && prettier -c src test",
+    "lint:fix": "eslint --ext .ts --fix && prettier -w src test",
+    "test": "pnpm lint && pnpm build && node ./test/test.mjs",
+    "release": "pnpm test && pnpm build && changelogen --release --publish && git push --follow-tags"
   },
   "devDependencies": {
+    "changelogen": "^0.5.4",
+    "eslint": "^8.44.0",
+    "eslint-config-unjs": "^0.2.1",
     "fs-extra": "^11.1.1",
     "node-fetch": "^3.3.1",
+    "prettier": "^2.8.8",
     "shiki": "^0.14.3",
-    "standard-version": "^9.5.0",
+    "typescript": "^5.1.6",
     "unbuild": "^1.2.1"
   }
 }

@@ -1,5 +1,5 @@
-import { getHighlighter } from 'shiki-es'
+import { getHighlighter } from "shiki-es";
 
-const highlighter = await getHighlighter({ theme: 'nord' })
+const highlighter = await getHighlighter({ theme: "nord" });
 
-console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' }))
+console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: "js" }));
