@@ -11,11 +11,14 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - run: corepack enable
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn test
+          node-version: "18"
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm test
+      - uses: codecov/codecov-action@v3
