@@ -1,6 +1,6 @@
 import { dirname, resolve } from "node:path";
+import { writeFile, mkdir, readFile, cp } from "node:fs/promises";
 import { defineBuildConfig } from "unbuild";
-import fse from "fs-extra";
 
 export default defineBuildConfig({
   failOnWarn: false,
@@ -22,7 +22,7 @@ export default defineBuildConfig({
   hooks: {
     async "build:before"(ctx) {
       const genDir = resolve(ctx.options.rootDir, "gen");
-      await fse.mkdirp(genDir);
+      await mkdir(genDir, { recursive: true });
 
       const shiki = await import("shiki");
       const assets = [
@@ -32,10 +32,10 @@ export default defineBuildConfig({
       const assetsCode = `export default {\n${assets
         .map((asset) => `  '${asset}': () => import('shiki/${asset}')`)
         .join(",\n")}\n}`;
-      await fse.writeFile(resolve(genDir, "assets.ts"), assetsCode);
+      await writeFile(resolve(genDir, "assets.ts"), assetsCode);
 
-      const buff = await fse.readFile("./node_modules/shiki/dist/onig.wasm");
-      await fse.writeFile(
+      const buff = await readFile("./node_modules/shiki/dist/onig.wasm");
+      await writeFile(
         resolve(genDir, "onig.ts"),
         `export default () => "${buff.toString("base64")}"`
       );
@@ -45,9 +45,11 @@ export default defineBuildConfig({
       const shikiDir = dirname(require.resolve("shiki/package.json"));
       const assetsDir = resolve(ctx.options.outDir, "assets");
       for (const item of ["languages", "themes", "dist/onig.wasm"]) {
-        await fse.copy(resolve(shikiDir, item), resolve(assetsDir, item));
+        await cp(resolve(shikiDir, item), resolve(assetsDir, item), {
+          recursive: true,
+        });
       }
-      await fse.copy(
+      await cp(
         resolve(shikiDir, "dist/index.d.ts"),
         resolve(ctx.options.outDir, "shiki.d.ts")
       );
