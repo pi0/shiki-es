@@ -2,6 +2,9 @@
 
 Standalone build of [shiki](https://github.com/shikijs/shiki) fully compatible with all ESM environments.
 
+> [!IMPORTANT]
+> Please migrate to [shikiji](https://github.com/antfu/shikiji)
+
 ## Usage
 
 Install:
